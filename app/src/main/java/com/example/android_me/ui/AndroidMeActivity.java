@@ -32,22 +32,24 @@ public class AndroidMeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_android_me);
 
-        BodyPartFragment headFragment = new BodyPartFragment();
-        headFragment.setImageIds(AndroidImageAssets.getHeads());
-        headFragment.setIndex(1);
-        FragmentManager manager1 = getSupportFragmentManager();
-        manager1.beginTransaction().replace(R.id.head_container, headFragment).commit();
+        if (savedInstanceState == null) {
+            BodyPartFragment headFragment = new BodyPartFragment();
+            headFragment.setImageIds(AndroidImageAssets.getHeads());
+            headFragment.setIndex(1);
+            FragmentManager manager1 = getSupportFragmentManager();
+            manager1.beginTransaction().replace(R.id.head_container, headFragment).commit();
 
-        BodyPartFragment bodyFragment = new BodyPartFragment();
-        bodyFragment.setImageIds(AndroidImageAssets.getBodies());
-        bodyFragment.setIndex(1);
-        FragmentManager manager2 = getSupportFragmentManager();
-        manager2.beginTransaction().replace(R.id.body_container, bodyFragment).commit();
+            BodyPartFragment bodyFragment = new BodyPartFragment();
+            bodyFragment.setImageIds(AndroidImageAssets.getBodies());
+            bodyFragment.setIndex(1);
+            FragmentManager manager2 = getSupportFragmentManager();
+            manager2.beginTransaction().replace(R.id.body_container, bodyFragment).commit();
 
-        BodyPartFragment legsFragment = new BodyPartFragment();
-        legsFragment.setImageIds(AndroidImageAssets.getLegs());
-        legsFragment.setIndex(1);
-        FragmentManager manager3 = getSupportFragmentManager();
-        manager3.beginTransaction().replace(R.id.legs_container, legsFragment).commit();
+            BodyPartFragment legsFragment = new BodyPartFragment();
+            legsFragment.setImageIds(AndroidImageAssets.getLegs());
+            legsFragment.setIndex(1);
+            FragmentManager manager3 = getSupportFragmentManager();
+            manager3.beginTransaction().replace(R.id.legs_container, legsFragment).commit();
+        }
     }
 }
