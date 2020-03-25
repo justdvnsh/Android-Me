@@ -16,9 +16,14 @@
 
 package com.example.android_me.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NavUtils;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.android_me.R;
@@ -32,24 +37,43 @@ public class AndroidMeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_android_me);
 
+        Intent intent = getIntent();
+
         if (savedInstanceState == null) {
             BodyPartFragment headFragment = new BodyPartFragment();
             headFragment.setImageIds(AndroidImageAssets.getHeads());
-            headFragment.setIndex(1);
+            headFragment.setIndex(intent.getExtras().getInt("headIndex"));
             FragmentManager manager1 = getSupportFragmentManager();
             manager1.beginTransaction().replace(R.id.head_container, headFragment).commit();
 
             BodyPartFragment bodyFragment = new BodyPartFragment();
             bodyFragment.setImageIds(AndroidImageAssets.getBodies());
-            bodyFragment.setIndex(1);
+            bodyFragment.setIndex(intent.getExtras().getInt("bodyIndex"));
             FragmentManager manager2 = getSupportFragmentManager();
             manager2.beginTransaction().replace(R.id.body_container, bodyFragment).commit();
 
             BodyPartFragment legsFragment = new BodyPartFragment();
             legsFragment.setImageIds(AndroidImageAssets.getLegs());
-            legsFragment.setIndex(1);
+            legsFragment.setIndex(intent.getExtras().getInt("legIndex"));
             FragmentManager manager3 = getSupportFragmentManager();
             manager3.beginTransaction().replace(R.id.legs_container, legsFragment).commit();
         }
+
+        ActionBar actionBar = getSupportActionBar();
+
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == android.R.id.home) {
+            NavUtils.navigateUpFromSameTask(this);
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
